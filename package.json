@@ -1,7 +1,14 @@
 {
   "name": "root",
   "private": true,
+  "scripts": {
+    "dev": "concurrently \"yarn front:dev\" \"yarn rest:dev\" \"yarn realtime:dev\"",
+    "front:dev": "cd packages/frontend && yarn dev",
+    "rest:dev": "cd packages/rest-api && yarn dev",
+    "realtime:dev": "cd packages/realtime-server && ./centrifugo -c ./config.json"
+  },
   "devDependencies": {
+    "concurrently": "^6.0.0",
     "lerna": "^4.0.0"
   }
 }
