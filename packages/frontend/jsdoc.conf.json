@@ -1,0 +1,38 @@
+{
+  "tags": {
+    "allowUnknownTags": true
+  },
+  "source": {
+    "include": ["./src"],
+    "includePattern": "\\.(jsx|js|ts|tsx)$",
+    "excludePattern": "(node_modules/|docs)"
+  },
+  "plugins": ["plugins/markdown", "node_modules/better-docs/component", "node_modules/better-docs/typescript"],
+  "opts": {
+    "encoding": "utf8",
+    "destination": "docs/",
+    "recurse": true,
+    "verbose": true,
+    "readme": "README.md",
+    "template": "node_modules/better-docs"
+  },
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false,
+    "search": true,
+    "better-docs": {
+      "name": "Whatsapp Clone Documentation",
+      "title": "Whatsapp Clone",
+      "navLinks": [
+        {
+          "label": "Github",
+          "href": "https://github.com/SoftwareBrothers/admin-bro"
+        },
+        {
+          "label": "Example Application",
+          "href": "https://admin-bro-example-app.herokuapp.com/admin"
+        }
+      ]
+    }
+}
+}

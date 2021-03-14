@@ -1,0 +1,54 @@
+.app {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  width: 100vw;
+  min-height: 600px;
+  background-color: #454545;
+
+  .app__body {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 400px auto;
+    grid-template-rows: 100%;
+    height: calc(100% - 2rem);
+    width: calc(100% - 6rem);
+    max-height: 1000px;
+    max-width: 1200px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.15);
+    min-height: 500px;
+  }
+
+  .icon-button {
+    height: 40px;
+    width: 40px;
+  }
+}
+
+.app::before {
+  height: 222px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 0;
+  content: "";
+  background-color: #5FC8BC;
+}
+
+
+@media only screen and (max-width: 1200px) {
+  .app__body {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.logout-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+}

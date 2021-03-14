@@ -1,0 +1,66 @@
+@import "../../styles/colors";
+
+$border-style: 1px solid $border-color-grey;
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  height: 100%;
+  width: 400px;
+
+  .sidebar__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ededed;
+    padding: 10px 16px;
+    height: 40px;
+    border-right: $border-style;
+    z-index: 2;
+
+    .sidebar__header-left {
+      height: 40px;
+    }
+
+    .sidebar__header-right {
+      width: 130px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 40px;
+
+      .icon-button {
+        color: $font-grey-light;
+      }
+    }
+  }
+
+  .sidebar__search-form {
+    height: 50px;
+    width: calc(100% - 1px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f6f6f6;
+    border-bottom: $border-style;
+    border-right: $border-style;
+    z-index: 2;
+  }
+
+  .sidebar__chat-list {
+    height: calc(100% - 60px - 50px);
+    width: calc(100% - 1px);
+    overflow: auto;
+    border-right: $border-style;
+    margin-top: -1px;
+  }
+
+  .sidebar__chat-list::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .sidebar__chat-list::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}

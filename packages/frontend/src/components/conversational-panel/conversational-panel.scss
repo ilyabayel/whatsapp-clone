@@ -1,0 +1,27 @@
+@import "../../styles/colors";
+
+@mixin box-shadow($property) {
+  -webkit-box-shadow: $property;
+  -moz-box-shadow: $property;
+  box-shadow: $property;
+}
+
+.conversational-panel {
+  height: calc(100% - 120px - 24px);
+  width: 100%;
+  background: url("../../../public/images/chat-bg-light.png") repeat;
+  background-size: 50%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 12px 0;
+}
+
+.conversational-panel::-webkit-scrollbar {
+  width: 6px;
+}
+
+.conversational-panel::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.1);
+}

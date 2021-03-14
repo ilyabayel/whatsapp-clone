@@ -1,0 +1,56 @@
+.conversational-panel__message-line.first-in-group {
+  .message {
+    z-index: 2;
+
+    .message__triangle {
+      visibility: visible;
+      position: absolute;
+      top: 0;
+      width: 0;
+      height: 0;
+      border-left: 18px solid transparent;
+      border-right: 18px solid transparent;
+      border-top: 18px solid white;
+      border-radius: 5px;
+      z-index: -1;
+    }
+
+    .message__name {
+      z-index: 5;
+      position: relative;
+      color: green;
+      display: block;
+    }
+  }
+}
+
+.conversational-panel__message-line {
+  width: auto;
+  height: auto;
+  padding: 0 25px;
+  margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+}
+
+.conversational-panel__message-line.message-line_interlocutor:first-child {
+  justify-content: flex-start;
+
+  .message__triangle {
+    left: -8px;
+  }
+}
+
+.conversational-panel__message-line.message-line_interlocutor {
+  justify-content: flex-start;
+}
+
+.conversational-panel__message-line.message-group_user.first-in-group {
+  .message__triangle {
+    right: -8px;
+  }
+}
+
+.conversational-panel__message-line {
+  justify-content: flex-end;
+}

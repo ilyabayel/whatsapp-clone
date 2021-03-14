@@ -1,0 +1,54 @@
+@import "../../styles/colors";
+
+.text-panel {
+  width: 100%;
+  height: 60px;
+  display: grid;
+  grid-template-rows: 100%;
+  grid-template-columns: 60px 60px auto 60px;
+  background-color: $header-background;
+
+  .text-panel__btn-container {
+    display: grid;
+    place-items: center;
+
+    .text-panel__attach-file-icon {
+      transform: rotate(45deg);
+    }
+  }
+
+  .text-panel__input-container {
+    display: grid;
+    place-items: center;
+
+    .text-panel__input-box {
+      width: calc(100% - 24px);
+      border-radius: 21px;
+      background-color: white;
+      padding: 9px 12px 11px;
+
+      input {
+        font-family: "Open Sans", sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        border: none;
+        border-radius: 0;
+        outline: none;
+        width: calc(100% - 2px);
+        padding-right: 2px;
+      }
+
+      input::-webkit-input-placeholder {
+        color: #AFB2B3;
+      }
+
+      input::-moz-placeholder {
+        color: #AFB2B3;
+      }
+
+      input::-ms-input-placeholder {
+        color: #AFB2B3;
+      }
+    }
+  }
+}
