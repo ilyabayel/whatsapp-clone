@@ -87,13 +87,14 @@ export class AuthService {
 
   async refresh(refreshLog: RefreshLog): Promise<AuthResponseDto> {
     for (const key in refreshLog) {
-      if (!refreshLog[key]) {
+      if (!refreshLog.hasOwnProperty(key)) {
         throw new HttpException(
           `Invalid ${key} field in body`,
           HttpStatus.BAD_REQUEST,
         );
       }
     }
+
     const refreshLogFromDb = await this.refreshTokenModel.findOneAndDelete({
       userId: refreshLog.userId,
       refreshToken: refreshLog.refreshToken,
