@@ -1,4 +1,4 @@
-import {AuthState, MessagesActionTypes, SET_TOKENS} from "./auth.types";
+import {AuthState, MessagesActionTypes, SET_AUTH} from "./auth.types";
 
 const initialState: AuthState = {
   accessToken: localStorage.getItem("accessToken"),
@@ -8,7 +8,7 @@ const initialState: AuthState = {
 
 export function authReducer(state = initialState, action: MessagesActionTypes): AuthState {
   switch (action.type) {
-    case SET_TOKENS:
+    case SET_AUTH:
       return {
         ...state,
         ...action.payload

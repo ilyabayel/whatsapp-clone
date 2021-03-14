@@ -5,14 +5,11 @@ class ApiService {
 
   constructor() {
     this.instance.defaults.baseURL = "http://localhost:8080/";
-    this.instance.defaults.headers.get["Accept"] = "application/json";
-    this.instance.defaults.headers.post["Accept"] = "application/json";
-  }
-
-  public setBearer(accessToken = "") {
     this.instance.interceptors.request.use((config) => {
       config.headers = {
-        Authorization: `Bearer ${accessToken}`
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        Accept: "application/json",
+        "Content-Type": "application/json"
       };
       return config;
     });

@@ -8,39 +8,24 @@ import {setItemsToLocalStorage} from "../../utils/local-storage.utils";
 
 class AuthService {
   public async login(loginDto: LoginDto): Promise<AxiosResponse<AuthResDto>> {
-    try {
-      const res = await apiService.instance.post<AuthResDto>("auth/login", loginDto);
-      if (!res.data) return;
-      this.setAuthOptions(res.data);
-      return res;
-    } catch (e) {
-      console.error(e);
-      throw new Error(e);
-    }
+    const res = await apiService.instance.post<AuthResDto>("auth/login", loginDto);
+    if (!res?.data) return;
+    this.setAuthOptions(res.data);
+    return res;
   }
 
   public async register(registerDto: RegisterDto): Promise<AxiosResponse<AuthResDto>> {
-    try {
-      const res = await apiService.instance.post<AuthResDto>("auth/register", registerDto);
-      if (!res.data) return;
-      this.setAuthOptions(res.data);
-      return res;
-    } catch (e) {
-      console.error(e);
-      throw new Error(e);
-    }
+    const res = await apiService.instance.post<AuthResDto>("auth/register", registerDto);
+    if (!res?.data) return;
+    this.setAuthOptions(res.data);
+    return res;
   }
 
   public async refresh(refreshDto: RefreshDto): Promise<AxiosResponse<AuthResDto>> {
-    try {
-      const res = await apiService.instance.post<AuthResDto>("auth/refresh", refreshDto);
-      if (!res?.data) throw new Error("Error while refresh");
-      this.setAuthOptions(res.data);
-      return res;
-    } catch (e) {
-      console.error(e);
-      throw new Error(e);
-    }
+    const res = await apiService.instance.post<AuthResDto>("auth/refresh", refreshDto);
+    if (!res) throw new Error("No refresh token");
+    this.setAuthOptions(res.data);
+    return res;
   }
 
   protected setAuthOptions(authResDto: AuthResDto): void {

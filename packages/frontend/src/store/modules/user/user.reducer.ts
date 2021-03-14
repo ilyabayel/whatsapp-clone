@@ -1,7 +1,7 @@
 import {SET_USER, User, UserActionTypes} from "./user.types";
 
 const defaultState: User = {
-  _id: "",
+  _id: localStorage.getItem("userId") ?? "",
   fullName: "",
   email: "",
   lastLogin: "",

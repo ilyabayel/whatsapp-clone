@@ -18,7 +18,6 @@ import {Sidebar} from "components/sidebar/sidebar";
 import "./app.scss";
 import {authService} from "./api/auth/auth-service";
 import {uaHash} from "./utils/ua-helper";
-import {setItemsToLocalStorage} from "./utils/local-storage.utils";
 
 const preloader = createPreloader();
 
@@ -39,47 +38,35 @@ export function App(): ReactElement {
   const logout = (e?) => {
     e?.preventDefault();
     localStorage.clear();
-    dispatch(actions.auth.setTokens({accessToken: null}));
+    dispatch(actions.auth.setAuth({accessToken: "", refreshToken: "", expiresIn: ""}));
   };
 
   useEffect(() => {
     if (!accessToken) return;
 
-    apiService.setBearer(accessToken);
-
     apiService.instance.interceptors.response.use(
       (res) => res,
-      (err) => {
+      async (err) => {
+        const originalRequest = err.config;
         if (err.response.status === 401) {
-          authService
-            .refresh({
-              refreshToken: localStorage.getItem("refreshToken"),
-              uaHash: uaHash,
-              userId: localStorage.getItem("userId")
-            })
-            .then((res) => {
-              const {accessToken, refreshToken} = res.data;
-              apiService.setBearer(accessToken);
-              setItemsToLocalStorage({...res.data});
-              dispatch(actions.auth.setTokens({accessToken, refreshToken}));
-            })
-            .catch(() => {
-              logout();
-            });
+          const authRes = await authService.refresh({
+            refreshToken: localStorage.getItem("refreshToken"),
+            uaHash: uaHash,
+            userId: localStorage.getItem("userId")
+          });
+          const {userId, ...authData} = authRes.data;
+          dispatch(actions.auth.setAuth(authData));
+          originalRequest.headers.Authorization = "Bearer " + authData.accessToken;
+          return apiService.instance(originalRequest);
+        }
+        if (err.response.status >= 400 && err.config.url === "auth/refresh") {
+          logout();
         }
       }
     );
 
-    messagesService
-      .getAll()
-      .then((messages) => {
-        dispatch(actions.messages.setMessages(messages));
-      })
-      .catch((err) => console.log(err));
-
     usersService.getInfo(localStorage.getItem("userId")).then((res) => {
       const user = res.data;
-      console.log(user);
       dispatch(
         actions.user.setUser({
           ...user,
@@ -88,23 +75,36 @@ export function App(): ReactElement {
       );
     });
 
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [accessToken]);
+
+  useEffect(() => {
     apiService.instance
       .get<string>("/wstoken", {params: {channel: "public"}})
       .then((res) => {
         centrifuge.setToken(res.data);
         centrifuge.connect();
         for (const room of rooms) {
-          centrifuge.subscribe("public:" + room.id, (res) => {
-            dispatch(actions.messages.addMessage(res.data));
-          });
+          if (!centrifuge.getSub("public:" + room.id)) {
+            centrifuge.subscribe("public:" + room.id, (res) => {
+              dispatch(actions.messages.addMessage(res.data));
+            });
+          }
         }
       });
+  }, [rooms]);
 
-    document.addEventListener("keydown", handleEscape);
-    return () => {
-      document.removeEventListener("keydown", handleEscape);
-    };
-  }, [accessToken]);
+  useEffect(() => {
+    messagesService
+      .getAll()
+      .then((messages) => {
+        dispatch(actions.messages.setMessages(messages));
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   if (!accessToken) {
     return <Redirect to="/login" push exact />;

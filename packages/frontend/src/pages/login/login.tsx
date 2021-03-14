@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Store} from "../../store/store";
 import {actions} from "../../store/actions";
 import {setItemsToLocalStorage} from "../../utils/local-storage.utils";
+import {usersService} from "../../api/users/users-service";
 
 const uaParser = new UAParser();
 
@@ -22,10 +23,12 @@ export function Login(): ReactElement {
   const login = async (e) => {
     e.preventDefault();
     if (!email || !password) return alert("Данные не были введены");
-    const res = await authService.login({email, password, uaHash: hash(uaParser.getUA())});
-    const {accessToken, refreshToken, expiresIn, userId} = res.data;
-    dispatch(actions.auth.setTokens({accessToken, refreshToken}));
+    const authRes = await authService.login({email, password, uaHash: hash(uaParser.getUA())});
+    const {accessToken, refreshToken, expiresIn, userId} = authRes.data;
     setItemsToLocalStorage({accessToken, refreshToken, expiresIn, userId});
+    dispatch(actions.auth.setAuth({accessToken, refreshToken, expiresIn}));
+    const userRes = await usersService.getInfo(userId);
+    dispatch(actions.user.setUser(userRes.data));
   };
 
   if (!accessToken) {
