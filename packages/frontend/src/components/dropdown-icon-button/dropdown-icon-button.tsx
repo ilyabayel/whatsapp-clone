@@ -1,5 +1,7 @@
 import React, {ReactElement} from "react";
-import {IconButton, Menu, MenuItem} from "@material-ui/core";
+import {IconButton} from "@material-ui/core";
+import {DropdownMenu} from "components/dropdown-menu/dropdown-menu";
+import {DropdownMenuItem} from "components/dropdown-menu-item/dropdown-menu-item";
 
 type Item = {
   label: string;
@@ -29,13 +31,13 @@ export function DropdownIconButton({icon, items, onChange}: Dropdown_I): ReactEl
       <IconButton className="icon-button" onClick={handleClick}>
         {icon}
       </IconButton>
-      <Menu keepMounted anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose(null)}>
+      <DropdownMenu anchorEl={anchorEl} onClose={() => setAnchorEl(null)}>
         {items.map((el) => (
-          <MenuItem onClick={handleClose(el)} key={el.label}>
+          <DropdownMenuItem onClick={handleClose(el.value)} key={el.label}>
             {el.label}
-          </MenuItem>
+          </DropdownMenuItem>
         ))}
-      </Menu>
+      </DropdownMenu>
     </>
   );
 }
