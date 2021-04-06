@@ -5,7 +5,6 @@
   box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.1);
   z-index: 3;
   width: 140px;
-  animation: fadeInWithMove .15s ease-out;
 
   .dropdown-menu__list {
     list-style: none;
@@ -13,7 +12,23 @@
   }
 }
 
-@keyframes fadeInWithMove {
+.dropdown-menu.direction_top-left {
+  animation: slideInTopLeft .05s ease-out;
+}
+
+.dropdown-menu.direction_top-right {
+  animation: slideInTopRight .05s ease-out;
+}
+
+.dropdown-menu.direction_bottom-left {
+  animation: slideInBottomLeft .05s ease-out;
+}
+
+.dropdown-menu.direction_bottom-right {
+  animation: slideInBottomRight .05s ease-out;
+}
+
+@keyframes slideInBottomLeft {
   0% {
     display: none;
     opacity: 0;
@@ -23,6 +38,62 @@
     display: block;
     opacity: 0;
     transform: scale(0.9, 0.8) translate(10%, -20%);
+  }
+
+  100% {
+    display: block;
+    opacity: 1;
+    transform: scale(1, 1) translate(0, 0);
+  }
+}
+@keyframes slideInBottomRight {
+  0% {
+    display: none;
+    opacity: 0;
+  }
+
+  1% {
+    display: block;
+    opacity: 0;
+    transform: scale(0.9, 0.8) translate(-10%, -20%);
+  }
+
+  100% {
+    display: block;
+    opacity: 1;
+    transform: scale(1, 1) translate(0, 0);
+  }
+}
+
+@keyframes slideInTopLeft {
+  0% {
+    display: none;
+    opacity: 0;
+  }
+
+  1% {
+    display: block;
+    opacity: 0;
+    transform: scale(0.9, 0.8) translate(10%, 20%);
+  }
+
+  100% {
+    display: block;
+    opacity: 1;
+    transform: scale(1, 1) translate(0, 0);
+  }
+}
+
+@keyframes slideInTopRight {
+  0% {
+    display: none;
+    opacity: 0;
+  }
+
+  1% {
+    display: block;
+    opacity: 0;
+    transform: scale(0.9, 0.8) translate(-10%, 20%);
   }
 
   100% {
