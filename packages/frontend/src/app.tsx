@@ -1,4 +1,4 @@
-import React, {ReactElement, useEffect, useState} from "react";
+import React, {ReactElement, useEffect} from "react";
 import {Redirect} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import moment from "moment";
@@ -30,7 +30,7 @@ export function App(): ReactElement {
   const accessToken = useSelector((state: Store) => state.auth.accessToken);
 
   const handleEscape = (e: KeyboardEvent) => {
-    if (e.code === "Escape") {
+    if (e.key === "Escape") {
       dispatch(actions.rooms.setSelectedRoom({id: "-1", participants: []}));
     }
   };

@@ -1,9 +1,10 @@
-import React, {ReactElement} from "react";
+import React, {ReactElement, useState} from "react";
 import {IconButton} from "@material-ui/core";
 import {MoreVert as MoreVertIcon, Search as SearchIcon} from "@material-ui/icons";
 import {ListTile} from "components/list-tile/list-tile";
 import {User} from "../../store/modules/user/user.types";
 import "./chat-header.scss";
+import {DropdownIconButton} from "components/dropdown-icon-button/dropdown-icon-button";
 
 type Props = {
   participant: User;

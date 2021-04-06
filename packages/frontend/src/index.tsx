@@ -9,19 +9,17 @@ import {store} from "./store/store";
 import "./index.scss";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <Router>
-        <Switch>
-          <Route path="/" exact>
-            <App />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-        </Switch>
-      </Router>
-    </Provider>
-  </React.StrictMode>,
-  document.getElementById("root")
+  <Provider store={store}>
+    <Router>
+      <Switch>
+        <Route path="/" exact>
+          <App />
+        </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
+      </Switch>
+    </Router>
+  </Provider>,
+  document.getElementById("app-root")
 );

@@ -1,0 +1,23 @@
+@import "src/styles/colors";
+
+.dropdown-menu-item {
+  font-size: 13px;
+  font-weight: 400;
+  padding: 10px 15px;
+  width: 140px;
+  text-wrap: none;
+  word-break: break-word;
+  box-sizing: border-box;
+  transition: background-color .15s;
+  cursor: pointer;
+}
+
+.dropdown-menu-item:hover {
+  background-color: $dropdown-menu-item-background;
+  transition: background-color .15s;
+}
+
+.dropdown-menu-item:active {
+  background-color: darken($dropdown-menu-item-background, 10%);
+  transition: background-color .05s;
+}

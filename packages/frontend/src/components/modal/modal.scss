@@ -1,0 +1,19 @@
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  width: 100vw;
+  height: 100vh;
+
+  .modal__content {
+    z-index: 1;
+  }
+
+  .modal__bg {
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+  }
+}
