@@ -2,7 +2,7 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"yarn front:dev\" \"yarn rest:dev\" \"yarn realtime:dev\"",
+    "dev": "docker compose --",
     "front:dev": "cd packages/frontend && yarn dev",
     "rest:dev": "cd packages/rest-api && yarn dev",
     "realtime:dev": "cd packages/realtime-server && ./centrifugo -c ./config.json"
