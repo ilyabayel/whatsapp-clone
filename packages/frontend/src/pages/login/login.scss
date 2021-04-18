@@ -59,9 +59,21 @@
           box-sizing: border-box;
         }
 
-        .login-form__form-control:focus {
+        .login-form__form-control.error {
+          border: 1px solid red;
+        }
+
+        .login-form__form-control.error:focus {
           outline: none;
-          box-shadow: 0 0 2px #5FC8BC40;
+          box-shadow: 0 0 0 1px red;
+        }
+
+        .login-form__error-message {
+          color: red;
+          margin: -3px 0 6px 0;
+          text-align: left;
+          width: 100%;
+          font-size: 13px;
         }
 
         .login-form__btn {
@@ -103,12 +115,13 @@
           transition: .1s;
         }
 
-        .login-form__register {
+        .login-form__toggle-link {
+          cursor: pointer;
           color: #5FC8BC;
           text-underline: none;
         }
 
-        .login-form__register:focus {
+        .login-form__toggle-link:focus {
           background-color: white;
           box-shadow: 0 0 0 1px rgba(0, 0, 0, 1);
           transition: .1s;
