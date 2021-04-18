@@ -1,56 +1,72 @@
-.search-field {
-  height: 36px;
-  width: 94%;
-  background-color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 18px;
+@import "../../styles/colors";
 
-  .search-field__icon-field {
+$border-style: 1px solid $border-color-grey;
+
+.search-field {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f6f6f6;
+  border-bottom: $border-style;
+  border-right: $border-style;
+  z-index: 2;
+  box-sizing: border-box;
+
+  .search-field__control {
     height: 36px;
-    width: 44px;
+    width: 94%;
+    background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 18px;
 
-    .search-field__icon {
-      width: 18px !important;
-      height: 18px !important;
-      cursor: pointer;
-      color: #b8b8b8;
+    .search-field__icon-field {
+      height: 36px;
+      width: 44px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .search-field__icon {
+        width: 18px !important;
+        height: 18px !important;
+        cursor: pointer;
+        color: #b8b8b8;
+      }
     }
-  }
 
-  .search-field__input {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 400;
-    font-size: 14px;
-    height: 20px;
-    width: calc(100% - 44px);
-    margin: 0 32px 0 30px;
-    background-color: white;
-    border: none !important;
-    outline: none;
-    overflow: scroll;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
+    .search-field__input {
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      height: 20px;
+      width: calc(100% - 44px);
+      margin: 0 32px 0 30px;
+      background-color: white;
+      border: none !important;
+      outline: none;
+      overflow: scroll;
+      -ms-overflow-style: none;
+    }
 
-  .search-field__input::-webkit-input-placeholder {
-    color: #AFB2B3;
-  }
+    .search-field__input::-webkit-input-placeholder {
+      color: #AFB2B3;
+    }
 
-  .search-field__input::-moz-placeholder {
-    color: #AFB2B3;
-  }
+    .search-field__input::-moz-placeholder {
+      color: #AFB2B3;
+    }
 
-  .search-field__input::-ms-input-placeholder {
-    color: #AFB2B3;
-  }
+    .search-field__input::-ms-input-placeholder {
+      color: #AFB2B3;
+    }
 
-  .search-field__input::-webkit-scrollbar {
-    display: none;
+    .search-field__input::-webkit-scrollbar {
+      display: none;
+    }
   }
 
 }
