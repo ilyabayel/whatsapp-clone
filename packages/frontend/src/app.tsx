@@ -3,21 +3,17 @@ import {Redirect} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import moment from "moment";
 import {createPreloader} from "./utils/optimization.utils";
-
+import {uaHash} from "./utils/ua-helper";
+import {authService} from "./api/auth/auth-service";
 import {messagesService} from "./api/messages/messages";
 import {usersService} from "./api/users/users-service";
 import {apiService} from "./api/api-service";
 import {centrifuge} from "./api/centrifuge";
-
-import {actions} from "./store/actions";
 import {Store} from "./store/store";
-
+import {actions} from "./store/actions";
 import {ChatContainer} from "./containers/chat-container/chat-container";
 import {Sidebar} from "components/sidebar/sidebar";
-
 import "./app.scss";
-import {authService} from "./api/auth/auth-service";
-import {uaHash} from "./utils/ua-helper";
 
 const preloader = createPreloader();
 

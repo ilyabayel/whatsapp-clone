@@ -1,15 +1,14 @@
 import React, {ReactElement, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {Redirect} from "react-router-dom";
 import hash from "object-hash";
 import {UAParser} from "ua-parser-js";
-
 import {authService} from "../../api/auth/auth-service";
-import "./login.scss";
-import {useDispatch, useSelector} from "react-redux";
+import {usersService} from "../../api/users/users-service";
 import {Store} from "../../store/store";
 import {actions} from "../../store/actions";
 import {setItemsToLocalStorage} from "../../utils/local-storage.utils";
-import {usersService} from "../../api/users/users-service";
+import "./login.scss";
 
 const uaParser = new UAParser();
 

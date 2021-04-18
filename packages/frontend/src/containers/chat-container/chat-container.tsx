@@ -1,10 +1,10 @@
 import React, {ReactElement} from "react";
 import {useSelector} from "react-redux";
+import {Store} from "../../store/store";
 import {ConversationalPanel} from "components/conversational-panel/conversational-panel";
 import {TextPanel} from "components/text-panel/text-panel";
 import {ChatHeader} from "components/chat-header/chat-header";
 import {ChatDummy} from "components/chat-dummy/chat-dummy";
-import {Store} from "../../store/store";
 import "./chat-container.scss";
 
 export function ChatContainer(): ReactElement {
