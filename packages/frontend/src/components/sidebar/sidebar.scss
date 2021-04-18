@@ -3,6 +3,8 @@
 $border-style: 1px solid $border-color-grey;
 
 .sidebar {
+  overflow: hidden;
+  position: relative;
   display: flex;
   flex-direction: column;
   background-color: white;
@@ -34,18 +36,6 @@ $border-style: 1px solid $border-color-grey;
         color: $font-grey-light;
       }
     }
-  }
-
-  .sidebar__search-form {
-    height: 50px;
-    width: calc(100% - 1px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f6f6f6;
-    border-bottom: $border-style;
-    border-right: $border-style;
-    z-index: 2;
   }
 
   .sidebar__chat-list {

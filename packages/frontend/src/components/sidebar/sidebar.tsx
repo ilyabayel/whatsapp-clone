@@ -1,16 +1,16 @@
-import React, {ReactElement, useMemo} from "react";
+import React, {ReactElement, useMemo, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Chat as ChatIcon, MoreVert as MoreVertIcon} from "@material-ui/icons";
 import {IconButton} from "@material-ui/core";
-
 import {Avatar} from "components/avatar/avatar";
-import "./sidebar.scss";
 import {SearchField} from "components/search-field/search-field";
 import {ChatListItem} from "components/chat-list-item/chat-list-item";
 import {Store} from "../../store/store";
 import {Room} from "../../store/modules/rooms/rooms.types";
 import {actions} from "../../store/actions";
 import {DropdownIconButton} from "components/dropdown-icon-button/dropdown-icon-button";
+import {Slider} from "components/slider/slider";
+import "./sidebar.scss";
 
 export function Sidebar(): ReactElement {
   const dispatch = useDispatch();
@@ -18,6 +18,7 @@ export function Sidebar(): ReactElement {
   const rooms = useSelector((state: Store) => state.rooms.rooms);
   const messagesDict = useSelector((state: Store) => state.messages);
   const selectedRoom = useSelector((state: Store) => state.rooms.selectedRoom);
+  const [sliderIsOpen, setSliderIsOpen] = useState(false);
 
   const selectRoom = (room: Room): void => {
     dispatch(actions.rooms.setSelectedRoom(room));
@@ -30,7 +31,7 @@ export function Sidebar(): ReactElement {
           <Avatar src={user.imageUrl} />
         </div>
         <div className="sidebar__header-right">
-          <IconButton className="icon-button">
+          <IconButton className="icon-button" onClick={() => setSliderIsOpen(true)}>
             <ChatIcon />
           </IconButton>
           <DropdownIconButton
@@ -40,9 +41,7 @@ export function Sidebar(): ReactElement {
           />
         </div>
       </div>
-      <div className="sidebar__search-form">
-        <SearchField />
-      </div>
+      <SearchField />
       <div className="sidebar__chat-list">
         {useMemo(() => {
           return rooms.map((room, idx) => {
@@ -63,6 +62,7 @@ export function Sidebar(): ReactElement {
           });
         }, [rooms, user, selectedRoom])}
       </div>
+      <Slider onClose={() => setSliderIsOpen(false)} isOpen={sliderIsOpen} title="New chat" />
     </div>
   );
 }
