@@ -1,0 +1,28 @@
+version: "3.9"
+services:
+  restapi:
+    build: ./packages/rest-api
+    ports:
+      - "8080:8080"
+  centrifugo:
+    image: centrifugo/centrifugo
+    command: centrifugo -c config.json --port=8086 --admin
+    ports:
+      - "8086:8086"
+    volumes:
+      - ./configs/config.json:/centrifugo/config.json
+  mongo:
+    image: mongo
+    volumes:
+      - ~/ProjectFiles/mongodb/database:/data/db
+    ports:
+      - 27017:27017
+    restart: unless-stopped
+  frontend:
+    build: ./packages/frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - centrifugo
+      - restapi
+      - mongo
