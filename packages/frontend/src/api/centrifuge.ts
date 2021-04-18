@@ -1,6 +1,6 @@
 import Centrifuge from "centrifuge";
 
-const c = new Centrifuge("ws://localhost:8000/connection/websocket");
+const c = new Centrifuge(process.env.CENTRIFUGE_URL);
 
 c.on("connect", (ctx) => {
   console.log("connected", ctx);

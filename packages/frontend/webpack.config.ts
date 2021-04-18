@@ -3,6 +3,7 @@ import Webpack, { Configuration } from "webpack";
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
+import Dotenv from 'dotenv-webpack';
 
 const webpackConfig = (env): Configuration => ({
   entry: './src/index.tsx',
@@ -27,6 +28,7 @@ const webpackConfig = (env): Configuration => ({
     clientLogLevel: 'warning',
     historyApiFallback: true,
     writeToDisk: false,
+    hot: true,
     stats: 'errors-only',
   },
   module: {
@@ -77,9 +79,6 @@ const webpackConfig = (env): Configuration => ({
       inject: true,
       minify: env.production ?? !env.development
     }),
-    new Webpack.DefinePlugin({
-      'process.env.PRODUCTION': env.production ?? !env.development
-    }),
     new ForkTsCheckerWebpackPlugin({
       eslint: {
         files: './src/**/*.{ts,tsx,js,jsx}'
@@ -92,6 +91,9 @@ const webpackConfig = (env): Configuration => ({
           to: './images'
         }
       ]
+    }),
+    new Dotenv({
+      ignoreStub: true
     })
   ],
   cache: {
