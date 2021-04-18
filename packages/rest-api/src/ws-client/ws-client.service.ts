@@ -9,12 +9,13 @@ import { MessageDocument } from "../messages/schemas/message.schema";
 export class WsClientService {
   centrifuge: Centrifuge;
   logger: Logger;
+  interval: NodeJS.Timeout | null;
 
   constructor() {
     this.logger = new Logger("WsClientService");
 
     this.centrifuge = new Centrifuge(
-      "ws://localhost:8000/connection/websocket",
+      "ws://localhost:8086/connection/websocket",
       { websocket: WebSocket },
     );
 
@@ -22,10 +23,15 @@ export class WsClientService {
 
     this.centrifuge.on("connect", (ctx) => {
       this.logger.log("Connected to centrifugo", ctx);
+      clearInterval(this.interval);
     });
 
     this.centrifuge.on("disconnect", (ctx) => {
       this.logger.log("Disconnected from centrifugo", ctx);
+      this.interval = setInterval(() => {
+        this.logger.log("Trying to reconnect to centrifugo", ctx);
+        this.centrifuge.connect();
+      }, 5000);
     });
 
     this.centrifuge.on("publish", (ctx) => {
