@@ -14,10 +14,9 @@ export class WsClientService {
   constructor() {
     this.logger = new Logger("WsClientService");
 
-    this.centrifuge = new Centrifuge(
-      "ws://localhost:8086/connection/websocket",
-      { websocket: WebSocket },
-    );
+    this.centrifuge = new Centrifuge(process.env.CENTRIFUGO_URI, {
+      websocket: WebSocket,
+    });
 
     this.centrifuge.setToken(this.getToken());
 
@@ -28,6 +27,7 @@ export class WsClientService {
 
     this.centrifuge.on("disconnect", (ctx) => {
       this.logger.log("Disconnected from centrifugo", ctx);
+      this.logger.log(JSON.stringify(process.env));
       this.interval = setInterval(() => {
         this.logger.log("Trying to reconnect to centrifugo", ctx);
         this.centrifuge.connect();

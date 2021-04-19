@@ -6,8 +6,6 @@ ADD . .
 
 RUN yarn
 
-ENV PORT=8080
-
 RUN yarn build
 
-CMD yarn start
+CMD yarn prod

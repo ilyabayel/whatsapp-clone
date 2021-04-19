@@ -6,17 +6,20 @@ import { AppService } from "./app.service";
 import { AuthModule } from "./auth/auth.module";
 import { UsersModule } from "./users/users.module";
 import { JwtAuthGuard } from "./auth/guards/jwt-auth.guard";
-import { mongoConstants } from "../configs/authConstants";
 import { MongoExceptionFilter } from "./__exсeption-filters__/mongo.exception-filter";
 import { MessagesModule } from "./messages/messages.module";
 import { RoomsModule } from "./rooms/rooms.module";
 import { WsClientModule } from "./ws-client/ws-client.module";
+import { ConfigModule } from "@nestjs/config";
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      envFilePath: `.env.${process.env.NODE_ENV}`,
+    }),
     AuthModule,
     UsersModule,
-    MongooseModule.forRoot(mongoConstants.uri, {
+    MongooseModule.forRoot(process.env.DATABASE_URI, {
       useUnifiedTopology: true,
       useNewUrlParser: true,
       useCreateIndex: true,
