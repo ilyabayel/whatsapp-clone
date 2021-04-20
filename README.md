@@ -13,7 +13,7 @@ To implement this project I used technologies such as:
 - ReactJS (Frontend App)
 - NestJS (Rest API) 
 - MongoDB (Database)
-- Centrifugo (Realtime Server)
+- Centrifugo (Real-time messaging server)
 
 ## How to build project
 
