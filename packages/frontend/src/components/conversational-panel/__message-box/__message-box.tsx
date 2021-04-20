@@ -14,7 +14,10 @@ interface MessageProps {
 export function MessageBox({senderId, body, timeStamp}: MessageProps): React.ReactElement {
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleClick = (e) => setAnchorEl(e.currentTarget);
+  const handleClick = (e) => {
+    console.log("click");
+    setAnchorEl(e.currentTarget);
+  };
   const handleClose = () => setAnchorEl(null);
 
   return (
@@ -25,7 +28,9 @@ export function MessageBox({senderId, body, timeStamp}: MessageProps): React.Rea
         {body}
         <div className="message-box__time">{moment(timeStamp).format("LT")}</div>
       </div>
-      <KeyboardArrowDown className="message-box__arrow-down" onClick={handleClick} />
+      <button className="message-box__arrow-down-btn" onClick={handleClick}>
+        <KeyboardArrowDown className="message-box__arrow-down-icon" />
+      </button>
       <DropdownMenu anchorEl={anchorEl} onClose={handleClose}>
         <DropdownMenuItem onClick={handleClose}>hey</DropdownMenuItem>
         <DropdownMenuItem onClick={handleClose}>hey</DropdownMenuItem>

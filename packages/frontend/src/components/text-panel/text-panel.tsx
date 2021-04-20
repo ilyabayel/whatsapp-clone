@@ -15,8 +15,8 @@ type Props = {
 export function TextPanel({user, room}: Props): ReactElement {
   const [message, setMessage] = useState("");
 
-  const handleSubmit = (event): void => {
-    event.preventDefault();
+  const handleSubmit = (e: React.FormEvent): void => {
+    e.preventDefault();
     moment.locale("ru");
     messagesService.create({
       body: message,

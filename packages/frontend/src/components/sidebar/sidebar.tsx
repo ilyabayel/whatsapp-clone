@@ -19,10 +19,52 @@ export function Sidebar(): ReactElement {
   const messagesDict = useSelector((state: Store) => state.messages);
   const selectedRoom = useSelector((state: Store) => state.rooms.selectedRoom);
   const [sliderIsOpen, setSliderIsOpen] = useState(false);
+  const [isFocusByKeyboard, setIsFocusByKeyboard] = useState(false);
+  const [selectedRoomIdx, setSelectedRoomIdx] = useState(null);
 
-  const selectRoom = (room: Room): void => {
+  function selectRoom(room: Room): void {
     dispatch(actions.rooms.setSelectedRoom(room));
-  };
+  }
+
+  function handleFocus() {
+    if (selectedRoomIdx === null) {
+      setSelectedRoomIdx(0);
+      dispatch(selectRoom(rooms[0]));
+    }
+  }
+
+  function handleKeyUp(e) {
+    if (e.key === "Tab") {
+      setIsFocusByKeyboard(true);
+      handleFocus();
+    }
+  }
+
+  function handleBlur() {
+    setIsFocusByKeyboard(false);
+  }
+
+  function handleArrowKeysDown(e: React.KeyboardEvent) {
+    switch (e.key) {
+      case "ArrowDown":
+        if (selectedRoomIdx < rooms.length - 1) {
+          setSelectedRoomIdx(selectedRoomIdx + 1);
+          dispatch(selectRoom(rooms[selectedRoomIdx + 1]));
+        }
+        break;
+      case "ArrowUp":
+        if (selectedRoomIdx > 0) {
+          setSelectedRoomIdx(selectedRoomIdx - 1);
+          dispatch(selectRoom(rooms[selectedRoomIdx - 1]));
+        }
+        break;
+      case "Enter":
+        console.log("Enter room");
+        break;
+      default:
+        console.log("nothing");
+    }
+  }
 
   return (
     <div className="sidebar">
@@ -42,9 +84,15 @@ export function Sidebar(): ReactElement {
         </div>
       </div>
       <SearchField />
-      <div className="sidebar__chat-list">
+      <div
+        className={`sidebar__chat-list ${isFocusByKeyboard ? "focus-keyboard" : ""}`}
+        tabIndex={0}
+        onBlur={handleBlur}
+        onKeyUp={handleKeyUp}
+        onKeyDown={handleArrowKeysDown}
+      >
         {useMemo(() => {
-          return rooms.map((room, idx) => {
+          return rooms.map((room) => {
             const interlocutor = room.participants.find((el) => el._id !== user._id);
             const messages = messagesDict[room.id] ?? [];
             const lastMessage = messages[0];
@@ -54,7 +102,7 @@ export function Sidebar(): ReactElement {
                 avatar={interlocutor.imageUrl}
                 time={lastMessage?.timestamp}
                 body={lastMessage?.body}
-                key={"room" + idx}
+                key={room.id}
                 isSelected={room.id === selectedRoom.id}
                 onClick={() => selectRoom(room)}
               />

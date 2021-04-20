@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "./dropdown-menu.scss";
 import {Modal} from "../modal/modal";
 
@@ -23,6 +23,15 @@ function getDirection(bottom, right) {
 }
 
 export function DropdownMenu({children, anchorEl, onClose}: DropdownMenuProps): JSX.Element {
+  useEffect(() => {
+    const list = document.querySelector(".dropdown-menu__list");
+    if (list !== null) {
+      if (list.firstElementChild instanceof HTMLElement) {
+        list.firstElementChild.focus();
+      }
+    }
+  }, [anchorEl]);
+
   if (anchorEl === null) return null;
 
   const anchorRect = anchorEl.getBoundingClientRect();
@@ -64,13 +73,25 @@ export function DropdownMenu({children, anchorEl, onClose}: DropdownMenuProps): 
       break;
   }
 
+  function handleArrowKeys(e: React.KeyboardEvent) {
+    e.stopPropagation();
+    if (e.key === "Escape") {
+      if (anchorEl instanceof HTMLElement) {
+        anchorEl.focus();
+      }
+      onClose();
+    }
+  }
+
   return (
     <Modal onClick={onClose}>
       <div
         className={`dropdown-menu direction_${direction}`}
         style={{position: "fixed", ...position}}
       >
-        <ul className="dropdown-menu__list">{children}</ul>
+        <ul className="dropdown-menu__list" onKeyDown={handleArrowKeys} tabIndex={-1}>
+          {children}
+        </ul>
       </div>
     </Modal>
   );

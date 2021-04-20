@@ -25,7 +25,7 @@ export function App(): ReactElement {
   const rooms = useSelector((state: Store) => state.rooms.rooms);
   const accessToken = useSelector((state: Store) => state.auth.accessToken);
 
-  const handleEscape = (e: KeyboardEvent) => {
+  const handleEscape = (e: React.KeyboardEvent) => {
     if (e.key === "Escape") {
       dispatch(actions.rooms.setSelectedRoom({id: "-1", participants: []}));
     }
@@ -70,11 +70,6 @@ export function App(): ReactElement {
         })
       );
     });
-
-    document.addEventListener("keydown", handleEscape);
-    return () => {
-      document.removeEventListener("keydown", handleEscape);
-    };
   }, [accessToken]);
 
   useEffect(() => {
@@ -107,7 +102,7 @@ export function App(): ReactElement {
   }
 
   return (
-    <div className="app">
+    <div className="app" tabIndex={-1} onKeyDown={handleEscape}>
       <button className="logout-btn" onClick={logout}>
         Log out
       </button>

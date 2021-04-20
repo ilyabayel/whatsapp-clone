@@ -8,7 +8,7 @@ interface DropdownMenuItemProps {
 
 export function DropdownMenuItem({children, onClick}: DropdownMenuItemProps): React.ReactElement {
   return (
-    <li className="dropdown-menu-item" onClick={onClick}>
+    <li className="dropdown-menu-item" onClick={onClick} tabIndex={0}>
       {children}
     </li>
   );

@@ -10,6 +10,8 @@ $border-style: 1px solid $border-color-grey;
   position: absolute;
   transform: translate(-100%);
   box-sizing: border-box;
+  display: grid;
+  grid-template-rows: 111px auto;
 }
 
 .slider_open {
@@ -45,7 +47,7 @@ $border-style: 1px solid $border-color-grey;
 
 .slider__header {
   width: 100%;
-  height: 111px;
+  height: 110px;
   background: #00bfa5;
   padding: 0 20px 0 23px;
   box-sizing: border-box;
@@ -80,4 +82,11 @@ $border-style: 1px solid $border-color-grey;
       box-sizing: border-box;
     }
   }
+}
+
+.slider__body {
+  width: 100%;
+  border-right: $border-style;
+  box-sizing: border-box;
+  overflow: auto;
 }

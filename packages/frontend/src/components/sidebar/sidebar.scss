@@ -44,6 +44,14 @@ $border-style: 1px solid $border-color-grey;
     overflow: auto;
     border-right: $border-style;
     margin-top: -1px;
+
+    &:focus {
+      outline: none;
+    }
+
+    &.focus-keyboard {
+      animation: Beat .5s ease-in-out;
+    }
   }
 
   .sidebar__chat-list::-webkit-scrollbar {
@@ -52,5 +60,14 @@ $border-style: 1px solid $border-color-grey;
 
   .sidebar__chat-list::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.1);
+  }
+}
+
+@keyframes Beat {
+  0% {
+    background-color: #e7f6f9;
+  }
+  100% {
+    background-color: white;
   }
 }
