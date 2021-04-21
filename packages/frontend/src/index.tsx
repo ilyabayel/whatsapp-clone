@@ -22,5 +22,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById("app-root")
 );
-
-document.querySelector("#modal-root").addEventListener("keydown", () => console.log("modal root"));
