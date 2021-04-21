@@ -45,6 +45,7 @@ export function TextPanel({user, room}: Props): ReactElement {
       <div className="text-panel__input-container">
         <form method="POST" onSubmit={handleSubmit} className="text-panel__input-box">
           <input
+            id="message-input"
             placeholder="Enter your message"
             type="text"
             value={message}

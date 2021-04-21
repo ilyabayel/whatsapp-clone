@@ -26,6 +26,16 @@ export function Sidebar(): ReactElement {
     dispatch(actions.rooms.setSelectedRoom(room));
   }
 
+  function handleClick(room: Room) {
+    selectRoom(room);
+    setTimeout(() => {
+      const messageInput = document.querySelector("#message-input");
+      if (messageInput instanceof HTMLElement) {
+        messageInput.focus();
+      }
+    }, 0);
+  }
+
   function handleFocus() {
     if (selectedRoomIdx === null) {
       setSelectedRoomIdx(0);
@@ -59,7 +69,10 @@ export function Sidebar(): ReactElement {
         }
         break;
       case "Enter":
-        console.log("Enter room");
+        const messageInput = document.querySelector("#message-input");
+        if (messageInput instanceof HTMLElement) {
+          messageInput.focus();
+        }
         break;
       default:
         console.log("nothing");
@@ -104,7 +117,7 @@ export function Sidebar(): ReactElement {
                 body={lastMessage?.body}
                 key={room.id}
                 isSelected={room.id === selectedRoom.id}
-                onClick={() => selectRoom(room)}
+                onClick={() => handleClick(room)}
               />
             );
           });
