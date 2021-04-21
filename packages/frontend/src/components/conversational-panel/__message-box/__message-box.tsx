@@ -4,7 +4,6 @@ import {KeyboardArrowDown} from "@material-ui/icons";
 
 import "./__message-box.scss";
 import {DropdownMenu} from "components/dropdown-menu/dropdown-menu";
-import {DropdownMenuItem} from "components/dropdown-menu-item/dropdown-menu-item";
 
 interface MessageProps {
   senderId: string;
@@ -31,11 +30,7 @@ export function MessageBox({senderId, body, timeStamp}: MessageProps): React.Rea
       <button className="message-box__arrow-down-btn" onClick={handleClick}>
         <KeyboardArrowDown className="message-box__arrow-down-icon" />
       </button>
-      <DropdownMenu anchorEl={anchorEl} onClose={handleClose}>
-        <DropdownMenuItem onClick={handleClose}>hey</DropdownMenuItem>
-        <DropdownMenuItem onClick={handleClose}>hey</DropdownMenuItem>
-        <DropdownMenuItem onClick={handleClose}>hey</DropdownMenuItem>
-      </DropdownMenu>
+      <DropdownMenu anchorEl={anchorEl} onClose={handleClose} items={[]} />
     </div>
   );
 }

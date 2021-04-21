@@ -12,6 +12,10 @@ $border-style: 1px solid $border-color-grey;
   box-sizing: border-box;
   display: grid;
   grid-template-rows: 111px auto;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .slider_open {

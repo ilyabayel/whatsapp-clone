@@ -39,7 +39,7 @@ export function Sidebar(): ReactElement {
   function handleFocus() {
     if (selectedRoomIdx === null) {
       setSelectedRoomIdx(0);
-      dispatch(selectRoom(rooms[0]));
+      selectRoom(rooms[0]);
     }
   }
 
@@ -59,13 +59,13 @@ export function Sidebar(): ReactElement {
       case "ArrowDown":
         if (selectedRoomIdx < rooms.length - 1) {
           setSelectedRoomIdx(selectedRoomIdx + 1);
-          dispatch(selectRoom(rooms[selectedRoomIdx + 1]));
+          selectRoom(rooms[selectedRoomIdx + 1]);
         }
         break;
       case "ArrowUp":
         if (selectedRoomIdx > 0) {
           setSelectedRoomIdx(selectedRoomIdx - 1);
-          dispatch(selectRoom(rooms[selectedRoomIdx - 1]));
+          selectRoom(rooms[selectedRoomIdx - 1]);
         }
         break;
       case "Enter":
@@ -91,7 +91,10 @@ export function Sidebar(): ReactElement {
           </IconButton>
           <DropdownIconButton
             icon={<MoreVertIcon />}
-            items={[{label: "hey", value: "hey"}]}
+            items={[
+              {label: "hey", value: "hey"},
+              {label: "hey2", value: "hey2"}
+            ]}
             onChange={(data) => console.log(data)}
           />
         </div>

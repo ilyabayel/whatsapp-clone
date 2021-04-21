@@ -1,16 +1,10 @@
 import React, {ReactElement} from "react";
 import {IconButton} from "@material-ui/core";
-import {DropdownMenu} from "components/dropdown-menu/dropdown-menu";
-import {DropdownMenuItem} from "components/dropdown-menu-item/dropdown-menu-item";
-
-type Item = {
-  label: string;
-  value: string;
-};
+import {DropdownMenu, MenuItem_t} from "components/dropdown-menu/dropdown-menu";
 
 interface Dropdown_I {
   icon: ReactElement;
-  items: Item[];
+  items: MenuItem_t[];
   onChange?: (Item) => void;
 }
 
@@ -31,13 +25,7 @@ export function DropdownIconButton({icon, items, onChange}: Dropdown_I): ReactEl
       <IconButton className="icon-button" onClick={handleClick}>
         {icon}
       </IconButton>
-      <DropdownMenu anchorEl={anchorEl} onClose={() => setAnchorEl(null)}>
-        {items.map((el) => (
-          <DropdownMenuItem onClick={handleClose(el.value)} key={el.label}>
-            {el.label}
-          </DropdownMenuItem>
-        ))}
-      </DropdownMenu>
+      <DropdownMenu anchorEl={anchorEl} onClose={() => setAnchorEl(null)} items={items} />
     </>
   );
 }

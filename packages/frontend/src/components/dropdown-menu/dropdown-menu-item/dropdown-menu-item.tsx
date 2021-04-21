@@ -4,12 +4,15 @@ import "./dropdown-menu-item.scss";
 interface DropdownMenuItemProps {
   children?: null | React.ReactNode;
   onClick?: (e?: React.MouseEvent) => void;
+  focused?: boolean;
 }
 
 export function DropdownMenuItem({children, onClick}: DropdownMenuItemProps): React.ReactElement {
   return (
-    <li className="dropdown-menu-item" onClick={onClick} tabIndex={0}>
-      {children}
+    <li>
+      <button className="dropdown-menu-item" onClick={onClick}>
+        {children}
+      </button>
     </li>
   );
 }

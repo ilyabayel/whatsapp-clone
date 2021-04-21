@@ -1,9 +1,15 @@
-import React, {useEffect} from "react";
-import "./dropdown-menu.scss";
+import React, {useEffect, useRef, useState} from "react";
 import {Modal} from "../modal/modal";
+import {DropdownMenuItem} from "components/dropdown-menu/dropdown-menu-item/dropdown-menu-item";
+import "./dropdown-menu.scss";
+
+export type MenuItem_t = {
+  label: string;
+  value: string;
+};
 
 interface DropdownMenuProps {
-  children: null | React.ReactNode;
+  items: MenuItem_t[];
   anchorEl: null | Element;
   onClose: () => void;
 }
@@ -22,13 +28,12 @@ function getDirection(bottom, right) {
   return vertical + "-" + horizontal;
 }
 
-export function DropdownMenu({children, anchorEl, onClose}: DropdownMenuProps): JSX.Element {
+export function DropdownMenu({items, anchorEl, onClose}: DropdownMenuProps): React.ReactElement {
+  const listEl = useRef<HTMLUListElement | null>(null);
+
   useEffect(() => {
-    const list = document.querySelector(".dropdown-menu__list");
-    if (list !== null) {
-      if (list.firstElementChild instanceof HTMLElement) {
-        list.firstElementChild.focus();
-      }
+    if (listEl.current instanceof HTMLElement) {
+      listEl.current.focus();
     }
   }, [anchorEl]);
 
@@ -73,9 +78,9 @@ export function DropdownMenu({children, anchorEl, onClose}: DropdownMenuProps): 
       break;
   }
 
-  function handleArrowKeys(e: React.KeyboardEvent) {
-    e.stopPropagation();
+  function handleKeyDown(e: React.KeyboardEvent) {
     if (e.key === "Escape") {
+      e.stopPropagation();
       if (anchorEl instanceof HTMLElement) {
         anchorEl.focus();
       }
@@ -83,14 +88,24 @@ export function DropdownMenu({children, anchorEl, onClose}: DropdownMenuProps): 
     }
   }
 
+  function handleChoose(item: MenuItem_t) {
+    console.log(item.value);
+    onClose();
+  }
+
   return (
     <Modal onClick={onClose}>
       <div
         className={`dropdown-menu direction_${direction}`}
         style={{position: "fixed", ...position}}
+        tabIndex={-1}
       >
-        <ul className="dropdown-menu__list" onKeyDown={handleArrowKeys} tabIndex={-1}>
-          {children}
+        <ul className="dropdown-menu__list" ref={listEl} onKeyDown={handleKeyDown}>
+          {items.map((item, idx) => (
+            <DropdownMenuItem onClick={() => handleChoose(item)} key={item.value}>
+              {item.label}
+            </DropdownMenuItem>
+          ))}
         </ul>
       </div>
     </Modal>
