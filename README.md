@@ -1,4 +1,4 @@
-# Whatsapp Clone (Project is under development, most part of it could be changed)
+# Whatsapp Clone (This project is under development, so lots of the features I've planned have not been implemented by me yet.)
 
 ## Welcome
 
