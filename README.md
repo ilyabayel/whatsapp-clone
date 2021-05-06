@@ -1,4 +1,4 @@
-# Whatsapp Clone
+# Whatsapp Clone (Project is under development, most part of it could be changed)
 
 ## Welcome
 
