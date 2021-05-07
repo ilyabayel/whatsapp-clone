@@ -1,4 +1,5 @@
-import {AuthState, MessagesActionTypes, SET_AUTH} from "./auth.types";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {AuthState, SetAuthProps} from "./auth.types";
 
 const initialState: AuthState = {
   accessToken: localStorage.getItem("accessToken"),
@@ -6,16 +7,13 @@ const initialState: AuthState = {
   refreshToken: localStorage.getItem("refreshToken")
 };
 
-export function authReducer(state = initialState, action: MessagesActionTypes): AuthState {
-  switch (action.type) {
-    case SET_AUTH:
-      return {
-        ...state,
-        ...action.payload
-      };
-    default:
-      return {
-        ...state
-      };
+export const authSlice = createSlice({
+  name: "setAuth",
+  initialState,
+  reducers: {
+    setAuth: (state, action: PayloadAction<SetAuthProps>) => ({
+      ...state,
+      ...action.payload
+    })
   }
-}
+});

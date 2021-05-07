@@ -1,7 +1,5 @@
-import {createStore, applyMiddleware} from "redux";
-import thunk from "redux-thunk";
-import {composeWithDevTools} from "redux-devtools-extension";
-import {reducers} from "./reducers";
+import {configureStore} from "@reduxjs/toolkit";
+import {rootReducer} from "./rootReducer";
 import {UserState} from "./modules/user/user.types";
 import {RoomsState} from "./modules/rooms/rooms.types";
 import {MessagesState} from "./modules/messages/messages.types";
@@ -14,4 +12,6 @@ export type Store = {
   auth: AuthState;
 };
 
-export const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
+export const store = configureStore({
+  reducer: rootReducer
+});

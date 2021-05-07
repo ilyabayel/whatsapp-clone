@@ -1,17 +1,7 @@
-import {IsetAuth, SET_AUTH, SetMessagesAction} from "./auth.types";
-import {setItemsToLocalStorage} from "../../../utils/local-storage.utils";
+import {SetAuthProps, SET_AUTH} from "./auth.types";
+import {createAction} from "@reduxjs/toolkit";
 
-function setAuth({accessToken, refreshToken, expiresIn}: IsetAuth): SetMessagesAction {
-  setItemsToLocalStorage({accessToken, refreshToken, expiresIn});
-  return {
-    type: SET_AUTH,
-    payload: {
-      accessToken,
-      refreshToken,
-      expiresIn
-    }
-  };
-}
+export const setAuth = createAction<SetAuthProps, typeof SET_AUTH>(SET_AUTH);
 
 export const authActions = {
   setAuth

@@ -2,11 +2,11 @@ import {combineReducers} from "redux";
 import {userReducer} from "./modules/user/user.reducer";
 import {roomsReducer} from "./modules/rooms/rooms.reducer";
 import {messagesReducer} from "./modules/messages/messages.reducer";
-import {authReducer} from "./modules/auth/auth.reducer";
+import {authSlice} from "./modules/auth/auth.reducer";
 
-export const reducers = combineReducers({
+export const rootReducer = combineReducers({
   user: userReducer,
   rooms: roomsReducer,
   messages: messagesReducer,
-  auth: authReducer
+  auth: authSlice.reducer
 });
