@@ -1,10 +1,10 @@
 import React, {ReactElement} from "react";
 import {KeyboardArrowDown} from "@material-ui/icons";
-import moment from "moment";
+import {hhmmFormatter} from "../../utils/date";
 
 import "./chat-list-item.scss";
 
-interface ChatListItemInterface {
+interface ChatListItemProps {
   avatar?: string;
   title?: string;
   body?: string;
@@ -13,7 +13,7 @@ interface ChatListItemInterface {
   onClick?: () => void;
 }
 
-const defaultProps: ChatListItemInterface = {
+const defaultProps: ChatListItemProps = {
   avatar: "https://bootstrap-material-ui.exentriq.com/assets/img/doc/avatar/avatar_0.jpg",
   title: "",
   body: "",
@@ -28,7 +28,7 @@ export function ChatListItem({
   time,
   isSelected,
   onClick
-}: ChatListItemInterface): ReactElement {
+}: ChatListItemProps): ReactElement {
   return (
     <div
       className={`chat-list-item ${isSelected ? "chat-list-item_selected" : ""}`}
@@ -40,7 +40,9 @@ export function ChatListItem({
       <div className="chat-list-item__main">
         <div className="chat-list-item__header">
           <span className="chat-list-item__title">{title}</span>
-          <span className="chat-list-item__time">{moment(time).format("LT")}</span>
+          <span className="chat-list-item__time">
+            {time && hhmmFormatter.format(parseInt(time))}
+          </span>
         </div>
         <div className="chat-list-item__body">
           <span className="chat-list-item__body-text">{body}</span>

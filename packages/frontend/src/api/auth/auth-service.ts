@@ -4,7 +4,7 @@ import {AuthResDto} from "./dto/auth-res.dto";
 import {LoginDto} from "./dto/login.dto";
 import {RegisterDto} from "./dto/register.dto";
 import {RefreshDto} from "./dto/refresh.dto";
-import {setItemsToLocalStorage} from "../../utils/local-storage.utils";
+import {setItemsToLocalStorage} from "../../utils/local-storage";
 
 class AuthService {
   public async login(loginDto: LoginDto): Promise<AxiosResponse<AuthResDto>> {

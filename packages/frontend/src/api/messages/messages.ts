@@ -1,7 +1,6 @@
 import {Message, MessagesState} from "../../store/modules/messages/messages.types";
-import moment from "moment";
-import {apiService} from "../api-service";
 import {AxiosResponse} from "axios";
+import {apiService} from "../api-service";
 
 export const messagesService = {
   getAll(): Promise<MessagesState> {
@@ -17,7 +16,7 @@ export const messagesService = {
               isDeleted: false,
               body: "Message N3",
               senderId: "d15",
-              timestamp: moment().format()
+              timestamp: Date.now().toString()
             },
             {
               _id: "m2",
@@ -27,7 +26,7 @@ export const messagesService = {
               isDeleted: false,
               body: "Message N2",
               senderId: "d16",
-              timestamp: moment().format()
+              timestamp: Date.now().toString()
             },
             {
               _id: "m1",
@@ -37,7 +36,7 @@ export const messagesService = {
               isDeleted: false,
               body: "Message N1",
               senderId: "d15",
-              timestamp: moment().format()
+              timestamp: Date.now().toString()
             }
           ],
           r2: [
@@ -49,7 +48,7 @@ export const messagesService = {
               isDeleted: false,
               body: "Message #8",
               senderId: "d15",
-              timestamp: moment().format()
+              timestamp: Date.now().toString()
             },
             {
               _id: "m7",
@@ -59,7 +58,7 @@ export const messagesService = {
               isDeleted: false,
               body: "Message #7",
               senderId: "d16",
-              timestamp: moment().format()
+              timestamp: Date.now().toString()
             },
             {
               _id: "m6",
@@ -69,7 +68,7 @@ export const messagesService = {
               isDeleted: false,
               body: "Message #6",
               senderId: "d15",
-              timestamp: moment().format()
+              timestamp: Date.now().toString()
             },
             {
               _id: "m5",
@@ -79,7 +78,7 @@ export const messagesService = {
               isDeleted: false,
               body: "Message #5",
               senderId: "d16",
-              timestamp: moment().format()
+              timestamp: Date.now().toString()
             },
 
             {
@@ -90,7 +89,7 @@ export const messagesService = {
               isDeleted: false,
               body: "Message #4",
               senderId: "d16",
-              timestamp: moment().format()
+              timestamp: Date.now().toString()
             }
           ]
         });

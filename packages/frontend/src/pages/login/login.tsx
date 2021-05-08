@@ -7,7 +7,7 @@ import {authService} from "../../api/auth/auth-service";
 import {usersService} from "../../api/users/users-service";
 import {Store} from "../../store/store";
 import {actions} from "../../store/actions";
-import {setItemsToLocalStorage} from "../../utils/local-storage.utils";
+import {setItemsToLocalStorage} from "../../utils/local-storage";
 import "./login.scss";
 
 const uaParser = new UAParser();

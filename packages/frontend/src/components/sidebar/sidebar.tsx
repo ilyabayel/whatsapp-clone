@@ -15,8 +15,8 @@ import "./sidebar.scss";
 export function Sidebar(): ReactElement {
   const dispatch = useDispatch();
   const user = useSelector((state: Store) => state.user);
-  const rooms = useSelector((state: Store) => state.rooms.rooms);
   const messagesDict = useSelector((state: Store) => state.messages);
+  const rooms = useSelector((state: Store) => state.rooms.rooms);
   const selectedRoom = useSelector((state: Store) => state.rooms.selectedRoom);
   const [sliderIsOpen, setSliderIsOpen] = useState(false);
   const [isFocusByKeyboard, setIsFocusByKeyboard] = useState(false);
@@ -124,7 +124,7 @@ export function Sidebar(): ReactElement {
               />
             );
           });
-        }, [rooms, user, selectedRoom])}
+        }, [rooms, user, selectedRoom, messagesDict])}
       </div>
       <Slider onClose={() => setSliderIsOpen(false)} isOpen={sliderIsOpen} title="New chat" />
     </div>
