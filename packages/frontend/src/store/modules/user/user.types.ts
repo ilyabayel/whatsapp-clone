@@ -1,5 +1,3 @@
-export const SET_USER = "SET_USER";
-
 export type User = {
   _id: string;
   email: string;
@@ -10,10 +8,3 @@ export type User = {
 };
 
 export type UserState = User;
-
-interface SetUserAction {
-  type: typeof SET_USER;
-  payload: User;
-}
-
-export type UserActionTypes = SetUserAction;

@@ -1,11 +1,11 @@
-import {Message, MessagesState} from "./messages.types";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {Message, MessagesState} from "./messages.types";
 
-const messagesState: MessagesState = {};
+const initialState: MessagesState = {};
 
 export const messagesSlice = createSlice({
-  initialState: messagesState,
   name: "messages",
+  initialState,
   reducers: {
     setMessages: (state, action: PayloadAction<MessagesState>) => {
       return {

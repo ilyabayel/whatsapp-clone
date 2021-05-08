@@ -1,7 +1,3 @@
-export const SET_MESSAGES = "SET_MESSAGES";
-export const ADD_MESSAGE = "ADD_MESSAGE";
-export const DELETE_MESSAGE = "DELETE_MESSAGE";
-
 export type Message = {
   _id?: string;
   _v?: number;
@@ -17,20 +13,3 @@ export type Message = {
 export type MessagesState = {
   [roomId: string]: Message[];
 };
-
-interface SetMessagesAction {
-  type: typeof SET_MESSAGES;
-  payload: MessagesState;
-}
-
-interface AddMessageAction {
-  type: typeof ADD_MESSAGE;
-  payload: Message;
-}
-
-interface DeleteMessageAction {
-  type: typeof DELETE_MESSAGE;
-  payload: Message;
-}
-
-export type MessagesActionsTypes = SetMessagesAction | AddMessageAction | DeleteMessageAction;

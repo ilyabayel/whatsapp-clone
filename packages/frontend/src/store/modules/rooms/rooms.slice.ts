@@ -1,6 +1,7 @@
-import {Room, RoomsActionsTypes, RoomsState, SET_ROOMS, SET_SELECTED_ROOM} from "./rooms.types";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {Room, RoomsState} from "./rooms.types";
 
-const defaultState: RoomsState = {
+const initialState: RoomsState = {
   rooms: Array(2)
     .fill(0)
     .map(
@@ -8,7 +9,7 @@ const defaultState: RoomsState = {
         id: `r${index + 1}`,
         participants: [
           {
-            _id: "d15",
+            _id: "607e91a055fdeb0023e9db56",
             fullName: "Ilya Kozlov",
             email: "ilyako2497@gmail.com",
             imageUrl:
@@ -21,7 +22,7 @@ const defaultState: RoomsState = {
             fullName: "Dima Kozlov",
             email: "dima@kozlov.dev",
             imageUrl:
-              "https://media-exp1.licdn.com/dms/image/C5603AQGUmeLJdkCvZg/profile-displayphoto-shrink_800_800/0?e=1609372800&v=beta&t=bRsclU6bd0zLrsACEMuqkXDG1x4sGmjsYQLciRZn8sM",
+              "https://sun9-23.userapi.com/impf/c633317/v633317341/35e2/rfbvPwxvLzI.jpg?size=2560x1440&quality=96&sign=700da9a73c0c5631ab7534e68489a0cc&type=album",
             lastLogin: "",
             __v: 0
           }
@@ -31,13 +32,15 @@ const defaultState: RoomsState = {
   selectedRoom: {id: "-1", participants: []}
 };
 
-export function roomsReducer(state = defaultState, action: RoomsActionsTypes): RoomsState {
-  switch (action.type) {
-    case SET_ROOMS:
-      return {...state, rooms: action.payload};
-    case SET_SELECTED_ROOM:
-      return {...state, selectedRoom: action.payload};
-    default:
-      return {...state};
+export const roomsSlice = createSlice({
+  name: "rooms",
+  initialState,
+  reducers: {
+    setRooms: (state, action: PayloadAction<Room[]>) => {
+      state.rooms = action.payload;
+    },
+    setSelectedRoom: (state, action: PayloadAction<Room>) => {
+      state.selectedRoom = action.payload;
+    }
   }
-}
+});
