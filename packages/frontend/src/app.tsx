@@ -17,7 +17,7 @@ import "./app.scss";
 
 const preloader = createPreloader();
 
-preloader.preload("/images/public/images/chat-bg-light.png");
+preloader.preload("/images/chat-bg-light.png");
 
 export function App(): ReactElement {
   const dispatch = useDispatch();

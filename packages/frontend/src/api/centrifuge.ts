@@ -1,6 +1,6 @@
 import Centrifuge from "centrifuge";
 
-const c = new Centrifuge(process.env.CENTRIFUGE_URL);
+const c = new Centrifuge(import.meta.env.VITE_CENTRIFUGE_URL);
 
 c.on("connect", (ctx) => {
   console.log("connected", ctx);

@@ -1,5 +1,5 @@
 import React, {ReactElement, useEffect, useRef, useState} from "react";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import {ArrowBack as ArrowBackIcon} from "@material-ui/icons";
 import "./slider.scss";
 
 interface SliderProps {

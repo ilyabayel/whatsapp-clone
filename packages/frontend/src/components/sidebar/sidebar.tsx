@@ -11,6 +11,7 @@ import {actions} from "../../store/actions";
 import {DropdownIconButton} from "components/dropdown-icon-button/dropdown-icon-button";
 import {Slider} from "components/slider/slider";
 import "./sidebar.scss";
+import {ErrorBoundary} from "components/error-boundary/error-boundary";
 
 export function Sidebar(): ReactElement {
   const dispatch = useDispatch();
@@ -126,7 +127,9 @@ export function Sidebar(): ReactElement {
           });
         }, [rooms, user, selectedRoom, messagesDict])}
       </div>
-      <Slider onClose={() => setSliderIsOpen(false)} isOpen={sliderIsOpen} title="New chat" />
+      <ErrorBoundary>
+        <Slider onClose={() => setSliderIsOpen(false)} isOpen={sliderIsOpen} title="New chat" />
+      </ErrorBoundary>
     </div>
   );
 }
